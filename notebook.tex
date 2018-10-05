@@ -1,0 +1,1005 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment2\_Final}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment 2: Practical data mining project - Implementing ID3
+with an Interactive
+console}\label{assignment-2-practical-data-mining-project---implementing-id3-with-an-interactive-console}
+
+by Luke Crawford (12617306) and Jonathan Rau (13112750)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{io}\PY{p}{,} \PY{n}{transform}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{log}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{decimal} \PY{k}{import} \PY{n}{Decimal}
+\end{Verbatim}
+
+
+    \section{Introduction}\label{introduction}
+
+We decided to implement the Iterative Dichotomiser 3 (ID3) algorithm to
+create decision tree classifiers. Decision Trees are generally easier to
+understand for laymen and can be stored in simple data structures. Our
+goal is to create a simple means to correctly identify if a given
+mushroom is poisonous or edible, as well as create a readable and simple
+design for our ID3 algorithm so others can easily understand our code.
+
+\subsection{Methodology}\label{methodology}
+
+We split our work areas into two: 'Assignment2\_Final' (this document)
+\& 'Assignment2\_Exploration'. In our Exploration, we explored the data,
+constructed our algorithm, compared to other methods, ran tests and
+attempted to build a dictionary for users to easily interact with the
+data. Assignment2\_Final (this document) is the final product which we
+have developed, including this report, our most recent up to date
+version of the ID3 algorithm and an interactive console which users can
+use to build ID3 Decision trees and use their own datasets if they so
+wish.
+
+\subsection{The ID3 Algorithm}\label{the-id3-algorithm}
+
+\subsubsection{Data Structure}\label{data-structure}
+
+The decision tree is designed using the object-oriented programming
+methodology. Nodes are objects of the decision tree, where each node
+holds references to its children. As we never traverse the tree from a
+leaf to the top, we don't store the reference of the parent for each
+node, which creates spatial efficiency in the tree compared to other ID3
+algorithms. Additionally, it is not necessary to retrieve a certain node
+without traversing the tree beginning from the root. Therefore, we did
+not need to use a datastructure like an array to store all nodes, which
+would provide random element reading with O(1) complexity. However, the
+lookup time complexity to get a specific child of a node is important to
+make a fast prediction. Hence, we store all children of a node in a
+dictionary as a member of the node with the branch value as a key.
+
+\subsection{Video Presentation}\label{video-presentation}
+
+Please see the video presentation linked here:
+https://www.youtube.com/watch?v=1C7Dq4cbfsg
+
+If there are any problems viewing the video presentation, contact
+luke.crawford@student.uts.edu.au
+
+\subsection{GitHub}\label{github}
+
+Please see our GitHub page linked here for the resources used:
+https://github.com/badookey/MushroomID3
+
+    \section{Decision Tree Classifier Source
+Code}\label{decision-tree-classifier-source-code}
+
+\subsection{Node class}\label{node-class}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{class} \PY{n+nc}{DecisionTreeNode}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{add\PYZus{}child}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{child\PYZus{}key}\PY{p}{,} \PY{n}{child\PYZus{}value}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{p}{[}\PY{n}{child\PYZus{}key}\PY{p}{]} \PY{o}{=} \PY{n}{child\PYZus{}value}
+                
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}children}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}attribute}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attribute}
+            
+            \PY{k}{def} \PY{n+nf}{set\PYZus{}attribute}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{attribute}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attribute} \PY{o}{=} \PY{n}{attribute}
+                
+            \PY{k}{def} \PY{n+nf}{set\PYZus{}label}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{label}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label}\PY{o}{=}\PY{n}{label}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}label}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{text}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{if} \PY{n+nb}{hasattr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{text} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leaf: label = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{text} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{split }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, descendants(}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attribute}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{value}\PY{p}{,} \PY{n}{child} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{children}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{text} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{   }\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{n}{level}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{branch = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, child node:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{level}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                    
+                    \PY{n}{text} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{return} \PY{n}{text}
+\end{Verbatim}
+
+
+    \section{Representation of the
+dataset}\label{representation-of-the-dataset}
+
+We are using the Pandas library to represent the dataset in collections
+of dataframes and series. For our usage, the biggest advantage of pandas
+is the ease of data column labelling. This allows us to easily access
+certain values and present the results in human readable format (no
+column indexes) without implementing a column-header list to map an
+index to a name.
+
+Pandas provides a simple method to load the data from a csv file.
+Additionally, we are splitting the data into training and testing
+datasets using the train\_test\_split method from the sklearn package.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}data}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{header\PYZus{}included\PYZus{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{header\PYZus{}included\PYZus{}}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{path}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+                 \PY{n}{add\PYZus{}default} \PY{o}{=} \PY{n}{read\PYZus{}Bool}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Do you want to add the default mushroom header? (True/False)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{add\PYZus{}default}\PY{p}{:}
+                     \PY{n}{assign\PYZus{}mushroom\PYZus{}header}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                 
+                 
+             \PY{k}{return} \PY{n}{data}
+         
+         \PY{k}{def} \PY{n+nf}{assign\PYZus{}mushroom\PYZus{}header}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Input column names from Mushroom Attributes.txt}
+             \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cap\PYZhy{}shape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cap\PYZhy{}surface}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cap\PYZhy{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bruises}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gill\PYZhy{}attachment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gill\PYZhy{}spacing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gill\PYZhy{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gill\PYZhy{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}shape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}root}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}surface\PYZhy{}above\PYZhy{}ring}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}surface\PYZhy{}below\PYZhy{}ring}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}color\PYZhy{}above\PYZhy{}ring}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stalk\PYZhy{}color\PYZhy{}below\PYZhy{}ring}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{veil\PYZhy{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{veil\PYZhy{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ring\PYZhy{}number}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ring\PYZhy{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spore\PYZhy{}print\PYZhy{}color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{habitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}Rename columns according to their real attributes}
+             \PY{n}{dataframe\PYZus{}}\PY{o}{.}\PY{n}{set\PYZus{}axis}\PY{p}{(}\PY{n}{columns}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{split\PYZus{}data}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{p}{,} \PY{n}{test\PYZus{}size\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{indexes} \PY{o}{=} \PY{n}{extract\PYZus{}attribute\PYZus{}set}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}y is our target class}
+             \PY{c+c1}{\PYZsh{}y = dataframe\PYZus{}.iloc[:,label\PYZus{}position]}
+             \PY{c+c1}{\PYZsh{}indexes = [i for i in range(dataframe\PYZus{}.columns.size) if i != label\PYZus{}position]}
+             \PY{c+c1}{\PYZsh{}x is our attributes}
+             \PY{c+c1}{\PYZsh{}x = dataframe\PYZus{}.iloc[:,indexes]}
+             
+             \PY{c+c1}{\PYZsh{}x\PYZus{}train\PYZus{}, x\PYZus{}test\PYZus{}, y\PYZus{}train\PYZus{}, y\PYZus{}test\PYZus{} = train\PYZus{}test\PYZus{}split(x,y,test\PYZus{}size = test\PYZus{}size\PYZus{})}
+             \PY{n}{train\PYZus{}}\PY{p}{,} \PY{n}{test\PYZus{}} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{n}{test\PYZus{}size\PYZus{}}\PY{p}{)}
+             
+             
+             \PY{n}{y\PYZus{}train\PYZus{}} \PY{o}{=} \PY{n}{train\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position}\PY{p}{]}
+             \PY{n}{y\PYZus{}test\PYZus{}} \PY{o}{=} \PY{n}{test\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position}\PY{p}{]}
+             \PY{n}{x\PYZus{}train\PYZus{}} \PY{o}{=} \PY{n}{train\PYZus{}}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{indexes}\PY{p}{]}
+             \PY{n}{x\PYZus{}test\PYZus{}} \PY{o}{=} \PY{n}{test\PYZus{}}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{indexes}\PY{p}{]}
+             \PY{k}{return} \PY{n}{y\PYZus{}train\PYZus{}}\PY{p}{,} \PY{n}{x\PYZus{}train\PYZus{}}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}}\PY{p}{,} \PY{n}{x\PYZus{}test\PYZus{}}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{extract\PYZus{}attribute\PYZus{}set}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{indexes} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{dataframe\PYZus{}}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{size}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o}{!=} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}
+            \PY{n}{x} \PY{o}{=} \PY{n}{dataframe\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{indexes}\PY{p}{]}
+            \PY{k}{return} \PY{n+nb}{set}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Performance of Statistical
+methods}\label{performance-of-statistical-methods}
+
+As the dataset is divided into subsets to calculate the information gain
+very often, keeping the target value separate from the attribute values
+would lead to a large decrease in performance. The subset of the
+attribute values would have to be joined with the target values for each
+computation of the information gain for a split attribute. This would be
+a computational overkill due to it's high time and space complexity.
+Keeping the attribute and target values together enables us to create
+subsets of the data based on the attributes in one shot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{entropy}\PY{p}{(}\PY{n}{target\PYZus{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{h} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{label\PYZus{}} \PY{o+ow}{in} \PY{n}{target\PYZus{}}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{h} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{target\PYZus{}}\PY{p}{[}\PY{n}{target\PYZus{}}\PY{o}{==}\PY{n}{label\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{size} \PY{o}{/} \PY{n}{target\PYZus{}}\PY{o}{.}\PY{n}{size}\PY{p}{)}\PY{o}{*} \PY{n}{log}\PY{p}{(}\PY{n}{target\PYZus{}}\PY{p}{[}\PY{n}{target\PYZus{}}\PY{o}{==}\PY{n}{label\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{size} \PY{o}{/} \PY{n}{target\PYZus{}}\PY{o}{.}\PY{n}{size}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{h}
+        
+        \PY{k}{def} \PY{n+nf}{determine\PYZus{}split\PYZus{}attribute}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{,} \PY{n}{attributes\PYZus{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{best\PYZus{}attribute\PYZus{}} \PY{o}{=} \PY{k+kc}{None}
+            \PY{n}{best\PYZus{}gain\PYZus{}} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{base\PYZus{}entropy\PYZus{}} \PY{o}{=} \PY{n}{entropy}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{attribute\PYZus{}} \PY{o+ow}{in} \PY{n}{attributes\PYZus{}}\PY{p}{:}
+                \PY{n}{x\PYZus{}select\PYZus{}} \PY{o}{=} \PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{n}{attribute\PYZus{}}\PY{p}{,} \PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{p}{]}\PY{p}{]}
+                \PY{n}{information\PYZus{}gain\PYZus{}} \PY{o}{=} \PY{n}{base\PYZus{}entropy\PYZus{}}
+                \PY{k}{for} \PY{n}{value\PYZus{}} \PY{o+ow}{in} \PY{n}{x\PYZus{}select\PYZus{}}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{attribute\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}split\PYZus{} = pd.concat([x\PYZus{}select\PYZus{}[x\PYZus{}select\PYZus{}==value\PYZus{}], target\PYZus{}], axis=1, join=\PYZsq{}inner\PYZsq{})}
+                    \PY{n}{split\PYZus{}entropy\PYZus{}} \PY{o}{=} \PY{n}{entropy}\PY{p}{(}\PY{n}{x\PYZus{}select\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{information\PYZus{}gain\PYZus{}} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{split\PYZus{}entropy\PYZus{}} \PY{o}{*} \PY{p}{(}\PY{n}{x\PYZus{}select\PYZus{}}\PY{o}{.}\PY{n}{size} \PY{o}{/} \PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{size}\PY{p}{)}
+                
+                \PY{k}{if} \PY{n}{information\PYZus{}gain\PYZus{}} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{best\PYZus{}gain\PYZus{}}\PY{p}{:}
+                    \PY{n}{best\PYZus{}attribute\PYZus{}} \PY{o}{=} \PY{n}{attribute\PYZus{}}
+                    \PY{n}{best\PYZus{}gain} \PY{o}{=} \PY{n}{information\PYZus{}gain\PYZus{}}
+                    
+            \PY{k}{return} \PY{n}{best\PYZus{}attribute\PYZus{}}
+\end{Verbatim}
+
+
+    \section{Structure of the ID3
+algorithm}\label{structure-of-the-id3-algorithm}
+
+We implemented the ID3 algorithm in an recursive approach. The algorithm
+splits the data based on the attribute which leads to the highest
+information gain and performs a recursive call to create the child
+nodes. The Terminate condition for the recursion is reached when the
+subset contains one or less categories of target values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}param attributes\PYZus{} should be a set of attributes}
+        \PY{c+c1}{\PYZsh{}param target\PYZus{} should be a series (like y\PYZus{}train)}
+        \PY{c+c1}{\PYZsh{}param data\PYZus{} should be a dataframe (like x\PYZus{}train)}
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}decision\PYZus{}tree}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{p}{,} \PY{n}{attributes\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{node\PYZus{}} \PY{o}{=} \PY{n}{DecisionTreeNode}\PY{p}{(}\PY{p}{)}
+            \PY{k}{if} \PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{size}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{node\PYZus{}}\PY{o}{.}\PY{n}{set\PYZus{}label}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{p}{)}
+                \PY{k}{return} \PY{n}{node\PYZus{}}
+                
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{attributes\PYZus{}}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{node\PYZus{}}\PY{o}{.}\PY{n}{set\PYZus{}label}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{last\PYZus{}valid\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{node\PYZus{}}
+                
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{split\PYZus{}attribute\PYZus{}} \PY{o}{=} \PY{n}{determine\PYZus{}split\PYZus{}attribute}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{,} \PY{n}{attributes\PYZus{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{splitting on: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{)}\PY{p}{)}
+                \PY{n}{node\PYZus{}}\PY{o}{.}\PY{n}{set\PYZus{}attribute}\PY{p}{(}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{)}
+                \PY{n}{split\PYZus{}select\PYZus{}} \PY{o}{=} \PY{n}{data\PYZus{}}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{]}
+                \PY{k}{for} \PY{n}{split\PYZus{}value\PYZus{}} \PY{o+ow}{in} \PY{n}{split\PYZus{}select\PYZus{}}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{child\PYZus{}data\PYZus{}} \PY{o}{=} \PY{n}{data\PYZus{}}\PY{p}{[}\PY{n}{data\PYZus{}}\PY{p}{[}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{]} \PY{o}{==} \PY{n}{split\PYZus{}value\PYZus{}}\PY{p}{]}
+                    \PY{n}{child\PYZus{}attributes\PYZus{}} \PY{o}{=} \PY{n}{attributes\PYZus{}}
+                    \PY{n}{child\PYZus{}attributes\PYZus{}}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}child\PYZus{}attributes: \PYZob{}\PYZcb{}\PYZsq{}.format(child\PYZus{}attributes\PYZus{}))}
+                    \PY{n}{node\PYZus{}}\PY{o}{.}\PY{n}{add\PYZus{}child}\PY{p}{(}\PY{n}{split\PYZus{}value\PYZus{}}\PY{p}{,} \PY{n}{build\PYZus{}decision\PYZus{}tree}\PY{p}{(}\PY{n}{child\PYZus{}data\PYZus{}}\PY{p}{,}\PY{n}{child\PYZus{}attributes\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print(\PYZsq{}currend subtree: \PYZob{}\PYZcb{}\PYZsq{}.format(node\PYZus{}))}
+                    
+                    \PY{c+c1}{\PYZsh{}as we are handling references, we have to add the attribut again}
+                    \PY{n}{child\PYZus{}attributes\PYZus{}}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{split\PYZus{}attribute\PYZus{}}\PY{p}{)}
+                    
+            \PY{k}{return} \PY{n}{node\PYZus{}}
+\end{Verbatim}
+
+
+    \section{Predicting Data}\label{predicting-data}
+
+Making predictions is done by traversing the tree, deciding which path
+to follow based on the attribute values until finding an end leaf. There
+is one edge case on the mushroom dataset, where an attribute's value was
+not present in the training set. We simply choose the children on a
+pseudorandom basis (which makes the ordering of the data structure not
+always the same on multiple run-throughs).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}data should be a dataframe (like x\PYZus{}train)}
+        \PY{c+c1}{\PYZsh{}root should be a a DecisionTreeNode (returned from build\PYZus{}decision\PYZus{}tree)}
+        \PY{k}{def} \PY{n+nf}{make\PYZus{}prediction}\PY{p}{(}\PY{n}{root}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{n}{predictions} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{point} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{current\PYZus{}node\PYZus{}} \PY{o}{=} \PY{n}{root}
+                \PY{n}{not\PYZus{}predicted} \PY{o}{=} \PY{k+kc}{True}
+                \PY{k}{while} \PY{n}{not\PYZus{}predicted}\PY{p}{:}
+                    \PY{k}{if}\PY{p}{(}\PY{n+nb}{hasattr}\PY{p}{(}\PY{n}{current\PYZus{}node\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{predictions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{current\PYZus{}node\PYZus{}}\PY{o}{.}\PY{n}{get\PYZus{}label}\PY{p}{(}\PY{p}{)}
+                        \PY{n}{not\PYZus{}predicted} \PY{o}{=} \PY{k+kc}{False}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{split\PYZus{}value} \PY{o}{=} \PY{n}{point}\PY{p}{[}\PY{n}{current\PYZus{}node\PYZus{}}\PY{o}{.}\PY{n}{get\PYZus{}attribute}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+                        \PY{k}{try}\PY{p}{:}
+                            \PY{n}{current\PYZus{}node\PYZus{}} \PY{o}{=} \PY{n}{current\PYZus{}node\PYZus{}}\PY{o}{.}\PY{n}{get\PYZus{}children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{split\PYZus{}value}\PY{p}{]}
+                        \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:}
+                            \PY{n}{current\PYZus{}node\PYZus{}} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{current\PYZus{}node\PYZus{}}\PY{o}{.}\PY{n}{get\PYZus{}children}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{}wrap the result in a Series to make the calculation of the accuracy easier}
+            \PY{n}{result} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+            \PY{k}{return} \PY{n}{result}
+\end{Verbatim}
+
+
+    \section{Creating an interface}\label{creating-an-interface}
+
+We wrap the methods build\_decision\_tree and make\_predictions in a
+class to provide an interface, which provides methods with a standard
+method signature.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{class} \PY{n+nc}{DecisionTreeClassifier}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{label\PYZus{}}\PY{p}{,} \PY{n}{values\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{data\PYZus{}} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{label\PYZus{}}\PY{p}{,}\PY{n}{values\PYZus{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tree}\PY{o}{=}\PY{n}{build\PYZus{}decision\PYZus{}tree}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{p}{,} \PY{n}{extract\PYZus{}attribute\PYZus{}set}\PY{p}{(}\PY{n}{data\PYZus{}}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}\PY{p}{,} \PY{n}{label\PYZus{}position\PYZus{}}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data\PYZus{}}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{make\PYZus{}prediction}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tree}\PY{p}{,} \PY{n}{data\PYZus{}}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{print\PYZus{}model}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tree}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{print\PYZus{}accuracy}\PY{p}{(}\PY{n}{real\PYZus{}values}\PY{p}{,} \PY{n}{predicted\PYZus{}values}\PY{p}{)}\PY{p}{:}
+            \PY{n}{stats}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{predicted\PYZus{}values}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{real\PYZus{}values}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rownames}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{colnames}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{accuracy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{real\PYZus{}values} \PY{o}{==} \PY{n}{predicted\PYZus{}values}\PY{p}{)} \PY{o}{/} \PY{n}{predicted\PYZus{}values}\PY{o}{.}\PY{n}{size}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The accuracy is: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Command Line Interface
+Functions}\label{command-line-interface-functions}
+
+The following code is simply to provide a command line to end users in
+order to construct their own ID3 Decision Trees and provide their own
+datasets to use.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{read\PYZus{}Bool}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{:}
+             \PY{n}{text} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             \PY{k}{if} \PY{n}{text} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{True}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{text} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{elif} \PY{n}{text} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{False}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{text} \PY{o}{=} \PY{k+kc}{False}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{read\PYZus{}Bool}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             \PY{k}{return} \PY{n}{text}
+         \PY{k}{def} \PY{n+nf}{read\PYZus{}float}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{d} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{invalid input, please try again}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{read\PYZus{}float}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             \PY{k}{if} \PY{l+m+mi}{0}\PY{o}{\PYZlt{}}\PY{n}{d}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{d}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the relative size has to be between 0.0 and 1.0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{read\PYZus{}float}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{read\PYZus{}int}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{i} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{invalid input, please try again}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{read\PYZus{}int}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             \PY{k}{return} \PY{n}{i}
+             
+         \PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{path} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter the absolute path of the dataset: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{header\PYZus{}included} \PY{o}{=} \PY{n}{read\PYZus{}Bool}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is the header included in the dataset?: (True/False)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{load\PYZus{}data}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{header\PYZus{}included}\PY{p}{)}
+             \PY{n}{split\PYZus{}size} \PY{o}{=} \PY{n}{read\PYZus{}float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter the relative size of the test set: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{model} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+             \PY{n}{label\PYZus{}position} \PY{o}{=} \PY{n}{read\PYZus{}int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{enter the position of the class label in the dataset: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{split\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{split\PYZus{}size}\PY{p}{,} \PY{n}{label\PYZus{}position}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training the model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{label\PYZus{}position}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{your model: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{print\PYZus{}model}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{evaluating on test set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{predict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{print\PYZus{}accuracy}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predict}\PY{p}{)}
+             
+         
+             
+\end{Verbatim}
+
+
+    \subsection{Command Line Interface}\label{command-line-interface}
+
+Simply type main() in order to access the command line.
+
+Please note the example (In {[}13{]}), which has an accuracy of 99.87\%
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+& Exploration (Neural Network) & Final (ID3)\tabularnewline
+\midrule
+\endhead
+Accuracy & 93\% & 99.8\%\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+enter the absolute path of the dataset: Data/Mushrooms.txt
+is the header included in the dataset?: (True/False)False
+Do you want to add the default mushroom header? (True/False)True
+enter the relative size of the test set: 0.4
+enter the position of the class label in the dataset: 0
+Training the model
+splitting on: cap-shape
+splitting on: ring-type
+splitting on: stalk-root
+splitting on: habitat
+splitting on: stalk-surface-above-ring
+splitting on: gill-attachment
+splitting on: stalk-surface-below-ring
+splitting on: veil-color
+splitting on: ring-number
+splitting on: spore-print-color
+splitting on: gill-size
+splitting on: cap-color
+splitting on: gill-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-color
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: habitat
+splitting on: stalk-root
+splitting on: stalk-surface-above-ring
+splitting on: habitat
+splitting on: ring-type
+splitting on: stalk-root
+splitting on: habitat
+splitting on: stalk-surface-above-ring
+splitting on: gill-attachment
+splitting on: stalk-surface-below-ring
+splitting on: veil-color
+splitting on: ring-number
+splitting on: spore-print-color
+splitting on: gill-size
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: habitat
+splitting on: stalk-surface-above-ring
+splitting on: gill-attachment
+splitting on: stalk-surface-below-ring
+splitting on: veil-color
+splitting on: ring-number
+splitting on: spore-print-color
+splitting on: gill-color
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-size
+splitting on: cap-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: gill-size
+splitting on: cap-color
+splitting on: gill-color
+splitting on: stalk-shape
+splitting on: odor
+splitting on: stalk-shape
+splitting on: odor
+splitting on: stalk-root
+splitting on: stalk-surface-above-ring
+splitting on: gill-color
+splitting on: ring-type
+splitting on: stalk-root
+splitting on: stalk-surface-above-ring
+splitting on: habitat
+splitting on: stalk-root
+splitting on: habitat
+splitting on: ring-type
+splitting on: stalk-root
+splitting on: stalk-surface-above-ring
+your model: 
+
+
+split cap-shape, descendants(
+   branch = f, child node:split ring-type, descendants(
+      branch = p, child node:split stalk-root, descendants(
+         branch = e, child node:split habitat, descendants(
+            branch = u, child node:split stalk-surface-above-ring, descendants(
+               branch = s, child node:split gill-attachment, descendants(
+                  branch = f, child node:split stalk-surface-below-ring, descendants(
+                     branch = s, child node:split veil-color, descendants(
+                        branch = w, child node:split ring-number, descendants(
+                           branch = o, child node:split spore-print-color, descendants(
+                              branch = k, child node:split gill-size, descendants(
+                                 branch = n, child node:split cap-color, descendants(
+                                    branch = n, child node:split gill-color, descendants(
+                                       branch = p, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))
+                                       branch = k, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = n, child node:leaf: label = e
+                                             branch = p, child node:leaf: label = p))
+                                       branch = g, child node:leaf: label = e
+                                       branch = w, child node:leaf: label = p
+                                       branch = n, child node:leaf: label = p)
+                                    branch = w, child node:leaf: label = p
+                                    branch = g, child node:leaf: label = e))
+                              branch = n, child node:split gill-color, descendants(
+                                 branch = n, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = g, child node:leaf: label = e
+                                       branch = w, child node:leaf: label = p
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))))
+                                 branch = w, child node:leaf: label = p
+                                 branch = g, child node:leaf: label = e
+                                 branch = p, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))
+                                       branch = w, child node:leaf: label = p))
+                                 branch = k, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = w, child node:leaf: label = p
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = n, child node:leaf: label = e
+                                             branch = p, child node:leaf: label = p))
+                                       branch = g, child node:leaf: label = e)))))))))
+            branch = g, child node:leaf: label = p)
+         branch = b, child node:split habitat, descendants(
+            branch = d, child node:leaf: label = e
+            branch = p, child node:leaf: label = e
+            branch = g, child node:leaf: label = p
+            branch = u, child node:leaf: label = p
+            branch = l, child node:leaf: label = p
+            branch = m, child node:leaf: label = p)
+         branch = ?, child node:leaf: label = e
+         branch = r, child node:leaf: label = e)
+      branch = e, child node:split stalk-root, descendants(
+         branch = ?, child node:split stalk-surface-above-ring, descendants(
+            branch = s, child node:split habitat, descendants(
+               branch = d, child node:leaf: label = p
+               branch = w, child node:leaf: label = e
+               branch = p, child node:leaf: label = p
+               branch = l, child node:leaf: label = p)
+            branch = k, child node:leaf: label = p)
+         branch = e, child node:leaf: label = e
+         branch = b, child node:leaf: label = e
+         branch = c, child node:leaf: label = p)
+      branch = l, child node:leaf: label = p
+      branch = f, child node:leaf: label = e
+      branch = n, child node:leaf: label = p)
+   branch = x, child node:split ring-type, descendants(
+      branch = p, child node:split stalk-root, descendants(
+         branch = b, child node:split habitat, descendants(
+            branch = d, child node:split stalk-surface-above-ring, descendants(
+               branch = s, child node:split gill-attachment, descendants(
+                  branch = f, child node:split stalk-surface-below-ring, descendants(
+                     branch = s, child node:split veil-color, descendants(
+                        branch = w, child node:split ring-number, descendants(
+                           branch = o, child node:split spore-print-color, descendants(
+                              branch = k, child node:split gill-size, descendants(
+                                 branch = b, child node:leaf: label = e
+                                 branch = n, child node:leaf: label = p)
+                              branch = n, child node:split gill-size, descendants(
+                                 branch = b, child node:leaf: label = e
+                                 branch = n, child node:split cap-color, descendants(
+                                    branch = w, child node:split stalk-shape, descendants(
+                                       branch = e, child node:leaf: label = p
+                                       branch = t, child node:leaf: label = e)
+                                    branch = g, child node:leaf: label = p
+                                    branch = p, child node:leaf: label = p
+                                    branch = y, child node:leaf: label = e))
+                              branch = u, child node:leaf: label = e)))))
+               branch = y, child node:leaf: label = e)
+            branch = g, child node:leaf: label = p
+            branch = u, child node:leaf: label = p
+            branch = p, child node:leaf: label = e)
+         branch = c, child node:leaf: label = e
+         branch = e, child node:split habitat, descendants(
+            branch = u, child node:split stalk-surface-above-ring, descendants(
+               branch = s, child node:split gill-attachment, descendants(
+                  branch = f, child node:split stalk-surface-below-ring, descendants(
+                     branch = s, child node:split veil-color, descendants(
+                        branch = w, child node:split ring-number, descendants(
+                           branch = o, child node:split spore-print-color, descendants(
+                              branch = n, child node:split gill-color, descendants(
+                                 branch = n, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = w, child node:leaf: label = p
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = n, child node:leaf: label = e
+                                             branch = p, child node:leaf: label = p))
+                                       branch = g, child node:leaf: label = e))
+                                 branch = p, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = g, child node:leaf: label = e
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = n, child node:leaf: label = e
+                                             branch = p, child node:leaf: label = p))
+                                       branch = w, child node:leaf: label = p))
+                                 branch = g, child node:leaf: label = e
+                                 branch = k, child node:split gill-size, descendants(
+                                    branch = n, child node:split cap-color, descendants(
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))
+                                       branch = g, child node:leaf: label = e
+                                       branch = w, child node:leaf: label = p))
+                                 branch = w, child node:leaf: label = p)
+                              branch = k, child node:split gill-size, descendants(
+                                 branch = n, child node:split cap-color, descendants(
+                                    branch = g, child node:leaf: label = e
+                                    branch = w, child node:leaf: label = p
+                                    branch = n, child node:split gill-color, descendants(
+                                       branch = p, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))
+                                       branch = w, child node:leaf: label = p
+                                       branch = n, child node:split stalk-shape, descendants(
+                                          branch = e, child node:split odor, descendants(
+                                             branch = p, child node:leaf: label = p
+                                             branch = n, child node:leaf: label = e))
+                                       branch = g, child node:leaf: label = e
+                                       branch = k, child node:leaf: label = p)))))))))
+            branch = g, child node:leaf: label = p)
+         branch = ?, child node:leaf: label = e
+         branch = r, child node:leaf: label = e)
+      branch = e, child node:split stalk-root, descendants(
+         branch = ?, child node:split stalk-surface-above-ring, descendants(
+            branch = k, child node:leaf: label = p
+            branch = s, child node:split gill-color, descendants(
+               branch = b, child node:leaf: label = p
+               branch = e, child node:leaf: label = e
+               branch = w, child node:leaf: label = e))
+         branch = e, child node:leaf: label = e
+         branch = b, child node:leaf: label = e)
+      branch = l, child node:leaf: label = p
+      branch = f, child node:leaf: label = e
+      branch = n, child node:leaf: label = p)
+   branch = k, child node:split ring-type, descendants(
+      branch = e, child node:split stalk-root, descendants(
+         branch = ?, child node:split stalk-surface-above-ring, descendants(
+            branch = k, child node:leaf: label = p
+            branch = s, child node:split habitat, descendants(
+               branch = l, child node:leaf: label = p
+               branch = p, child node:leaf: label = p
+               branch = d, child node:leaf: label = p
+               branch = w, child node:leaf: label = e))
+         branch = b, child node:leaf: label = e
+         branch = c, child node:leaf: label = p)
+      branch = p, child node:split stalk-root, descendants(
+         branch = b, child node:split habitat, descendants(
+            branch = d, child node:leaf: label = e
+            branch = l, child node:leaf: label = p)
+         branch = ?, child node:leaf: label = e)
+      branch = n, child node:leaf: label = p)
+   branch = b, child node:split ring-type, descendants(
+      branch = p, child node:split stalk-root, descendants(
+         branch = c, child node:leaf: label = e
+         branch = ?, child node:leaf: label = e
+         branch = b, child node:split stalk-surface-above-ring, descendants(
+            branch = s, child node:leaf: label = p
+            branch = y, child node:leaf: label = e))
+      branch = e, child node:leaf: label = p)
+   branch = s, child node:leaf: label = e
+   branch = c, child node:leaf: label = p)
+
+
+evaluating on test set:
+
+
+
+actual        e     p   All
+predicted                  
+e          1713     0  1713
+p             4  1533  1537
+All        1717  1533  3250
+The accuracy is: 0.9987692307692307
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Conclusion}\label{conclusion}
+
+In conclusion, the above ID3 implementation is a concise and simple
+interactive program which allows anyone to classify data efficiently and
+easily. The design of the code and command-line make it so anyone can
+modify the algorithm to their particular needs with ease. This is due to
+the object oriented design of the code and the simple, but powerful
+commands of the interface. Anyone can use any
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
